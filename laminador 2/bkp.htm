@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Gerdau | Laminação 2</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        background: #1e1e1e;
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        max-width: 420px;
+        width: 100%;
+        padding: 20px 15px;
+        border: 1px solid #999;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      header.title span {
+        font-size: 3em;
+        letter-spacing: 1px;
+        color: #f5f5f5;
+      }
+      .container form {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .container select {
+        width: 100%;
+        height: 23px;
+      }
+
+      form .input {
+        width: 100%;
+        height: 33px;
+        margin-bottom: 15px;
+        margin-top: 5px;
+        border: 1px solid #444;
+        border-radius: 6px;
+        padding: 5px;
+      }
+      form .input::placeholder {
+        color: #111;
+      }
+      form .input:focus {
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+      }
+
+      form .input-content {
+        width: 100%;
+      }
+      form .label {
+        color: #f5f5f5;
+        font-size: 1em;
+        align-self: flex-start;
+      }
+      .divider {
+        border-bottom: 1px solid #ccc;
+        margin-top: 20px;
+        margin-bottom: 30px;
+      }
+      form .submitBtn {
+        width: 100%;
+        height: 35px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 1em;
+        cursor: pointer;
+        color: #fff;
+        background: #999;
+      }
+      form .submitBtn:hover {
+        color: #999;
+        background: #fff;
+        border: 1px solid #999;
+      }
+
+      .disable {
+        display: none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="title">
+        <span>GERDAU</span>
+      </header>
+      <form action="/get" method="get" id="prov">
+        <div class="input-content" >
+          <span class="label">WI-FI SSID*</span>
+          <input
+            id="wfssid"
+            type="text"
+            name="ssid"
+            placeholder="Digite o SSID da rede Wi-Fi"
+            class="input"
+          />
+        </div>
+
+        <div class="input-content " id="spa">
+          <span class="label">WI-FI PASSWORD*</span>
+          <input
+            id="wfpass"
+            type="text"
+            name="pass"
+            placeholder="Digite a senha da rede Wi-Fi"
+            class="input"
+          />
+        </div>
+
+        <div class="input-content disable" id="wpa2-1">
+          <span class="label">USUARIO DA REDE</span>
+          <input
+            id="netuser"
+            type="text"
+            name="netuser"
+            placeholder="Digite a senha da rede Wi-Fi"
+            class="input"
+          />
+        </div>
+
+        <div class="input-content disable" id="wpa2-2">
+          <span class="label">SENHA DA REDE</span>
+          <input
+            id="netpass"
+            type="text"
+            name="netpass"
+            placeholder="Digite a senha da rede Wi-Fi"
+            class="input"
+          />
+        </div>
+
+        <span class="label">SEGURANÇA DA REDE</span>
+        <select id="select" onchange="selector">
+          <option value="wpa1">WPA 1</option>
+          <option value="wpa2">WPA 2</option>
+          <option value="spa">Sem Segurança</option>
+        </select>
+
+        <div class="divider"></div>
+        <div class="input-content">
+          <span class="label">E-MAIL*</span>
+          <input
+            id="hdrmail"
+            type="email"
+            name="email"
+            placeholder="Digite email cadastrado"
+            class="input"
+          />
+        </div>
+        <div class="input-content">
+          <span class="label">HDR PASSWORD*</span>
+          <input
+            id="hdrpass"
+            type="text"
+            name="upass"
+            placeholder="Digite a senha cadastrada"
+            class="input"
+          />
+        </div>
+
+        <div class="divider"></div>
+        <div class="input-content">
+          <span class="label">IP Local</span>
+          <input
+            id="localip"
+            type="text"
+            name="localip"
+            placeholder="*Digite somente em caso de utilização em rede local"
+            class="input"
+          />
+        </div>
+        <button type="submit" class="submitBtn">PROVISIONAR</button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("prov");
+      const select = document.getElementById("select");
+      let wifi_security = 'wpa1';
+      
+      function validateWPA1({wfssid, wfpass, hdrmail, hdrpass}){
+        if (
+          !wfssid.value ||
+          !wfpass.value ||
+          !hdrmail.value ||
+          !hdrpass.value
+        ) {
+          if (!wfssid.value) {
+            wfssid.style.border = "1px solid #c00";
+          } else {
+            wfssid.style.border = "1px solid #444";
+          }
+
+          if (!wfpass.value) {
+            wfpass.style.border = "1px solid #c00";
+          } else {
+            wfpass.style.border = "1px solid #444";
+          }
+
+          if (!hdrmail.value) {
+            hdrmail.style.border = "1px solid #c00";
+          } else {
+            hdrmail.style.border = "1px solid #444";
+          }
+
+          if (!hdrpass.value) {
+            hdrpass.style.border = "1px solid #c00";
+          } else {
+            hdrpass.style.border = "1px solid #444";
+          }
+          return alert("Preencha todos os campos indicados!");
+        }
+        return form.submit();
+      }
+
+      function validateWPA2({wfssid, wfpass, netuser, netpass,  hdrmail, hdrpass}){
+        if (
+          !wfssid.value ||
+          !wfpass.value ||
+          !netuser.value ||
+          !netpass.value ||
+          !hdrmail.value ||
+          !hdrpass.value
+        ) {
+          if (!wfssid.value) {
+            wfssid.style.border = "1px solid #c00";
+          } else {
+            wfssid.style.border = "1px solid #444";
+          }
+
+          if (!wfpass.value) {
+            wfpass.style.border = "1px solid #c00";
+          } else {
+            wfpass.style.border = "1px solid #444";
+          }
+
+          if (!netuser.value) {
+            netuser.style.border = "1px solid #c00";
+          } else {
+            netuser.style.border = "1px solid #444";
+          }
+
+          if (!netpass.value) {
+            netpass.style.border = "1px solid #c00";
+          } else {
+            netpass.style.border = "1px solid #444";
+          }
+
+          if (!hdrmail.value) {
+            hdrmail.style.border = "1px solid #c00";
+          } else {
+            hdrmail.style.border = "1px solid #444";
+          }
+
+          if (!hdrpass.value) {
+            hdrpass.style.border = "1px solid #c00";
+          } else {
+            hdrpass.style.border = "1px solid #444";
+          }
+          return alert("Preencha todos os campos indicados!");
+        }
+        return form.submit();
+      }
+
+
+      function validateSPA({wfssid, hdrmail, hdrpass}){
+        if (
+          !wfssid.value ||
+          !hdrmail.value ||
+          !hdrpass.value
+        ) {
+          if (!wfssid.value) {
+            wfssid.style.border = "1px solid #c00";
+          } else {
+            wfssid.style.border = "1px solid #444";
+          }
+
+          if (!hdrmail.value) {
+            hdrmail.style.border = "1px solid #c00";
+          } else {
+            hdrmail.style.border = "1px solid #444";
+          }
+
+          if (!hdrpass.value) {
+            hdrpass.style.border = "1px solid #c00";
+          } else {
+            hdrpass.style.border = "1px solid #444";
+          }
+          return alert("Preencha todos os campos indicados!");
+        }
+        return form.submit();
+      }
+
+
+      function processForm(e) {
+        if (e.preventDefault) e.preventDefault();
+
+        const wfssid = document.getElementById("wfssid");
+        const wfpass = document.getElementById("wfpass");
+
+        const netuser = document.getElementById("netuser");
+        const netpass = document.getElementById("netpass");
+
+        const hdrmail = document.getElementById("hdrmail");
+        const hdrpass = document.getElementById("hdrpass");
+
+        switch(wifi_security){
+          case "wpa1":
+            validateWPA1({wfssid, wfpass, hdrmail, hdrpass});
+            break;
+          case "wpa2":
+            validateWPA2({wfssid, wfpass, netuser, netpass,  hdrmail, hdrpass});
+            break;
+          case "spa":
+            validateSPA({wfssid, hdrmail, hdrpass});
+            break;
+        }       
+      }
+
+      if (form.attachEvent) {
+        form.attachEvent("submit", processForm);
+      } else {
+        form.addEventListener("submit", processForm);
+      }
+
+
+      function selector(e){
+        wifi_security=e.target.value;
+
+        const inputWrapperWfPass = document.getElementById("spa");
+        const inputWrapperNtUser = document.getElementById("wpa2-1");
+        const inputWrapperNtPass = document.getElementById("wpa2-2");
+
+        document.getElementById("wfpass").value="";
+        document.getElementById("netuser").value="";
+        document.getElementById("netpass").value="";
+
+        switch(wifi_security){
+          case "wpa1":inputWrapperWfPass.classList.remove('disable');
+            inputWrapperNtUser.classList.add('disable');
+            inputWrapperNtPass.classList.add('disable');
+            break;
+          case "wpa2":
+            inputWrapperWfPass.classList.remove('disable');
+            inputWrapperNtUser.classList.remove('disable');
+            inputWrapperNtPass.classList.remove('disable');
+            break;
+          case "spa":
+            inputWrapperWfPass.classList.add('disable');
+            inputWrapperNtUser.classList.add('disable');
+            inputWrapperNtPass.classList.add('disable');
+            break;
+        }
+      }
+      if(select.attachEvent){
+        select.attachEvent("change", selector);
+      }else {
+        select.addEventListener("change", selector);
+      }
+
+    </script>
+  </body>
+</html>

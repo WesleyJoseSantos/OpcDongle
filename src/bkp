@@ -1,0 +1,50 @@
+#include <Arduino.h>
+#include "ArduinoJson.h"
+#include "WiFi.h"
+#include "ESPAsyncWebServer.h"
+
+StaticJsonDocument<2048> doc;
+AsyncWebServer server(80);
+
+const char* ssid = "Wifi OPC Dongle";
+const char* password = "admin123";
+
+void taskCommunication();
+void merge(JsonObject dest, JsonObjectConst src);
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+
+  WiFi.softAP(ssid, password);
+
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    String json;
+    serializeJsonPretty(doc, json);
+    request->send_P(200, "text/json", json.c_str());
+  });
+
+  Serial.println(WiFi.localIP());
+  server.begin();
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  taskCommunication();
+}
+
+void taskCommunication(){
+  if(Serial.available()){
+    String data = Serial.readStringUntil('\n');
+
+    if(data == "WifiOpcDongle?"){
+      Serial.println("Yes");
+    }else{
+      StaticJsonDocument<256> temp;
+      deserializeJson(temp, data);
+
+      String key = temp["Id"];
+      doc[key] = temp["Value"];
+    }
+  }
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Gerdau | Laminação 2</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        max-width: 420px;
+        width: 100%;
+        padding: 20px 15px;
+        background: #1e1e1e;
+        border: 1px solid #999;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      .title {
+        text-align: center;
+        color: #f5f5f5;
+      }
+
+      header.title span {
+        font-size: 3em;
+        /* letter-spacing: 1px; */
+      }
+      .container form {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .container select {
+        width: 100%;
+        height: 23px;
+      }
+
+      .input {
+        width: 100%;
+        height: 33px;
+        margin-bottom: 15px;
+        margin-top: 5px;
+        border: 1px solid #444;
+        border-radius: 6px;
+        padding: 5px;
+      }
+      .input::placeholder {
+        color: #111;
+      }
+      .input:focus {
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+      }
+
+      .input-content {
+        width: 100%;
+      }
+      .label {
+        color: #f5f5f5;
+        font-size: 1em;
+        align-self: flex-start;
+      }
+      .divider {
+        border-bottom: 1px solid #ccc;
+        margin-top: 20px;
+        margin-bottom: 30px;
+      }
+      .btn {
+        margin: 8px;
+        width: 100%;
+        height: 35px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 1em;
+        cursor: pointer;
+        color: #fff;
+        background: #999;
+      }
+
+      .btn:hover {
+        color: #999;
+        background: #fff;
+        border: 1px solid #999;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      li {
+        padding-top: 10px;
+        margin-left: 5px;
+        color: #fff;
+      }
+
+      .bloch {
+        display:inline-block;
+        height: 10px;
+        width: 10px;
+      }
+        
+      .on {background: green;}
+      .off {background: gray;}
+      .rdy {background: darkblue;}
+      .problem {background: gold;}
+
+      .disable {
+        display: none;
+      }
+
+      /* Style the tab content */
+      .content {
+        max-width: 420px;
+        min-height: 440px;
+        width: 100%;
+        padding: 20px 15px;
+        background: #1e1e1e;
+        border: 1px solid #999;
+        border-radius: 6px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        color: #fff;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="title">
+        <span>GERDAU</span>
+        <h3>NR12</h3>
+        <div class="divider"></div>
+      </header>
+
+      <div id="TC0" class="content">
+        <ul><li><span class='bloch on' id="bool1"></span>
+          Status Bloqueio PLC Sick 
+        </li></ul>
+        <ul><li><span class='bloch on' id="bool2"></span>
+          Emergência do Leito
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Portas Travadas
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Rolos Emparelhadores Acesso Bloqueado
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Leito Acesso Bloqueado
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Bloqueio Selecionado
+        </li></ul> 
+      </div>
+
+        <button onclick="showScreen('home.htm')" class="btn">Voltar</button>
+
+    </div>
+      
+      <!-- <h2 id="loginText" style="position: absolute; top:0px; bottom: 0px;" >Login</h2> -->
+      
+    <script>
+      
+      function showScreen(screen) {
+        window.location.href = "/?screen=" + screen
+      }
+
+      setInterval(function ( ) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+
+            console.log(this.responseText);
+
+            data.forEach(tag => {
+              updateObject(tag.Name, tag.Value);
+            });
+          }
+        };
+        xhttp.open("GET", "/?data=true", true);
+        xhttp.send();
+      }, 1000) ;
+
+      function updateObject(id, value){
+        var obj = document.getElementById(id);
+
+        if(obj.classList.contains("bloch")){
+          obj.className = value ? "bloch on" : "bloch off";
+        }
+      }
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,232 @@
+<html>
+<head>
+<style>
+html {
+    font: 12px/1.2em sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  margin-left: 5px;
+}
+
+div.column {
+  display: table-cell;
+}
+
+.ball {
+  position: relative;
+  height: 5px;
+  width: 10px;
+  margin-right: 3px;
+}
+
+.bachi {
+  display:inline-block;
+  height: 6px;
+  width: 6px;
+  margin-right: 3px;
+  border-style: solid;
+  border-radius: 50%;
+  border-width: 2px;
+}
+
+.boch {
+  display:inline-block;
+  height: 10px;
+  width: 10px;
+  margin-right: 3px;
+  border-radius: 50%;
+}
+
+.bloch {
+  display:inline-block;
+  height: 10px;
+  width: 5px;
+}
+
+.topball {
+  height: 5px;
+  border-radius: 90px 90px 0 0;
+}
+
+.botball {
+  height: 5px;
+  border-radius: 0 0 90px 90px;
+}
+
+.rightball {
+  width: 5px;
+  border-radius: 0 90px 90px 0;
+}
+
+.leftball {
+  margin-right: 0;
+  width: 5px;
+  border-radius: 90px 0 0 90px;
+}
+
+
+.good {background: green;}
+.problem {background: gold;}
+.bad {background: red;}
+
+
+.good-data {border-color: green;}
+.problem-data {border-color: gold;}
+.bad-data {border-color: red;}
+
+</style>
+</head>
+<body>
+<h3>Status halves</h3>
+<ul>
+<li>
+    <div class='column'>
+      <div class='ball topball good'></div>
+      <div class='ball botball bad'></div>
+    </div>
+    <div class='column'>
+      Good bad
+    </div>
+</li>
+<li>
+    <div class='column'>
+      <div class='ball topball bad'></div>
+      <div class='ball botball good'></div>
+    </div>
+    <div class='column'>
+      Bad good
+    </div>
+</li>
+<li>
+    <div class='column'>
+      <div class='ball topball bad'></div>
+      <div class='ball botball bad'></div>
+    </div>
+    <div class='column'>
+      Bad bad
+    </div>
+</li>
+<li>
+    <div class='column'>
+      <div class='ball topball problem'></div>
+      <div class='ball botball bad'></div>
+    </div>
+    <div class='column'>
+      Problem bad
+    </div>
+</li>
+<li>
+    <div class='column'>
+      <div class='ball topball good'></div>
+      <div class='ball botball good'></div>
+    </div>
+    <div class='column'>
+      Good good
+    </div>
+</li>
+</ul>
+
+<h3>Status other halves</h3>
+<ul>
+<li>
+    <span class='boch leftball good'></span><span class='boch rightball bad'></span>
+      Good bad
+</li>
+<li>
+    <span class='boch leftball bad'></span><span class='boch rightball good'></span>
+      Bad good
+</li>
+<li>
+    <span class='boch leftball bad'></span><span class='boch rightball bad'></span>
+      Bad bad
+</li>
+<li>
+    <span class='boch leftball problem'></span><span class='boch rightball bad'></span>
+      Problem bad
+</li>
+<li>
+    <span class='boch leftball good'></span><span class='boch rightball good'></span>
+    Good good
+</li>
+</ul>
+
+<h3>Status blocks</h3>
+<ul>
+<li>
+    <span class='bloch good'></span><span class='bloch bad'></span>
+    Good bad
+</li>
+<li>
+    <span class='bloch bad'></span><span class='bloch good'></span>
+      Bad good
+</li>
+<li>
+    <span class='bloch bad'></span><span class='bloch bad'></span>
+      Bad bad
+</li>
+<li>
+    <span class='bloch problem'></span><span class='bloch bad'></span>
+      Problem bad
+</li>
+<li>
+    Good good
+    <span class='bloch good'></span><span class='bloch good'></span>
+</li>
+</ul>
+
+<h3>Status borderline</h3>
+<ul>
+<li>
+    <span class='bachi good bad-data'></span>
+      Good bad
+</li>
+<li>
+    <span class='bachi bad good-data'></span>
+      Bad good
+</li>
+<li>
+    <span class='bachi bad bad-data'></span>
+      Bad bad
+</li>
+<li>
+    <span class='bachi problem bad-data'></span>
+      Problem bad
+</li>
+<li>
+    <span class='bachi good good-data'></span>
+      Good good
+</li>
+</ul>
+
+
+<h3>Status doubles</h3>
+<ul>
+<li>
+    <span class='boch good'></span><span class='boch bad'></span>
+      Good bad
+</li>
+<li>
+    <span class='boch bad'></span><span class='boch good'></span>
+      Bad good
+</li>
+<li>
+    <span class='boch bad'></span><span class='boch bad'></span>
+      Bad bad
+</li>
+<li>
+    <span class='boch problem'></span><span class='boch bad'></span>
+      Problem bad
+</li>
+<li>
+    <span class='boch good'></span><span class='boch good'></span>
+    Good good
+</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Gerdau | Laminação 2</title>
+    <style>
+
+      * {
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        max-width: 420px;
+        width: 100%;
+        padding: 20px 15px;
+        background: #1e1e1e;
+        border: 1px solid #999;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      .card {
+        width: 145px;
+        height: 170px;
+        margin: 25px auto auto auto;
+        background: #292929;
+        border: 1px solid #999;
+        border-radius: 6px;
+      }
+
+      .title {
+        text-align: center;
+        color: #f5f5f5;
+      }
+
+      header.title span {
+        font-size: 3em;
+        /* letter-spacing: 1px; */
+      }
+
+      .container form {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .container select {
+        width: 100%;
+        height: 23px;
+      }
+
+      .input {
+        width: 100%;
+        height: 33px;
+        margin-bottom: 15px;
+        margin-top: 5px;
+        border: 1px solid #444;
+        border-radius: 6px;
+        padding: 5px;
+      }
+
+      .input::placeholder {
+        color: #111;
+      }
+
+      .input:focus {
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+      }
+
+      .input-content {
+        width: 100%;
+      }
+
+      .label {
+        color: #f5f5f5;
+        font-size: 1em;
+        align-self: flex-start;
+      }
+
+      .divider {
+        border-bottom: 1px solid #ccc;
+        margin-top: 20px;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        margin: 8px;
+        width: 100%;
+        height: 35px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 1em;
+        cursor: pointer;
+        color: #fff;
+        background: #999;
+      }
+
+      .btn:hover {
+        color: #999;
+        background: #fff;
+        border: 1px solid #999;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      li {
+        padding-top: 10px;
+        margin-left: 5px;
+        color: #fff;
+      }
+
+      .bloch {
+        display:inline-block;
+        height: 10px;
+        width: 10px;
+      }
+        
+      .on {background: green;}
+      .off {background: gray;}
+      .rdy {background: darkblue;}
+      .problem {background: gold;}
+      .fail {background: red;}
+
+      /* Style the tab */
+      .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background: #2b2b2b;
+        width: 100%;
+        border-radius: 6px;
+      }
+
+      /* Style the buttons inside the tab */
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        color: #fff;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+        background: #535353;
+      }
+
+      /* Create an active/current tablink class */
+      .tab button.active {
+        background: #686868;
+      }
+
+      /* Style the tab content */
+      .tabcontent {
+        display: none;
+        max-width: 420px;
+        min-height: 440px;
+        width: 100%;
+        padding: 20px 15px;
+        background: #1e1e1e;
+        border: 1px solid #999;
+        border-radius: 6px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        color: #fff;
+      }
+
+      .circle{
+        padding: 15px;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <div class="container">
+
+      <header class="title">
+        <span>GERDAU</span>
+        <h3>Leito</h3>
+        <div class="divider"></div>
+      </header>
+
+      <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'REMP')">REMP</button>
+        <button class="tablinks" onclick="openTab(event, 'TC0')">TC0</button>
+        <button class="tablinks" onclick="openTab(event, 'CTF')">CTF</button>
+        <button class="tablinks" onclick="openTab(event, 'GRolos')">GRolos</button>
+      </div>
+
+      <div id="REMP" class="tabcontent">
+        <h3>Rolos Emparelhadores</h3>
+        <ul><li><span class='bloch on'></span>
+          Status Motores   
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status NR12
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status Emergência 1
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status Emergência 2
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Saída de Vergalhões Habilitada
+        </li></ul>
+        <div class="card">
+          <p class="title">Velocidade</p>
+          <div id="bar" class="circle"></div>
+        </div>
+      </div>
+
+      <div id="TC0" class="tabcontent">
+        <h3>Transferidor de Correntes</h3>
+        <ul><li><span class='bloch on'></span>
+          Status Motor  
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status Sincronização
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Saída de Vergalhões Habilitada
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status Rede Saída Perfis
+        </li></ul>
+        <ul><li><span></span>
+          Posição Atual: #value
+        </li></ul>
+        <ul><li><span></span>
+          Número de Barras Atual: #value
+        </li></ul> 
+      </div>
+
+      <div id="CTF" class="tabcontent">
+        <h3>Carro Transferidor</h3>
+        <ul><li><span class='bloch on'></span>
+          Status Motor  
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status Sincronização
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Sensor Carro Abaixo
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Sensor Carro Acima
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Sensor Carro Adiante
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Sensor Carro Atrás
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Carro excedeu posição adiante
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Carro excedeu posição atrás
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Saída de Vergalhões Habilitada
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status Rede Saída Perfis
+        </li></ul>
+        <ul><li><span></span>
+          Posição Atual Carro 1: #value
+        </li></ul>
+        <ul><li><span></span>
+          Posição Atual Carro 2: #value
+        </li></ul> 
+      </div>
+
+      <div id="GRolos" class="tabcontent">
+        <h3>GR0 e GR1</h3>
+        <ul><li><span class='bloch on'></span>
+          Status Motor GR0
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status Motor GR1
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status NR12
+        </li></ul>
+        <ul><li><span class='bloch on'></span>
+          Status Emergência
+        </li></ul>
+      </div>
+
+        <button onclick="showScreen('home.htm')" class="btn">Voltar</button>
+    </div>
+      
+      <!-- <h2 id="loginText" style="position: absolute; top:0px; bottom: 0px;" >Login</h2> -->
+      
+    <script>
+
+      function showScreen(screen) {
+        window.location.href = "/?screen=" + screen
+      }
+
+      function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        if(evt != null)
+          evt.currentTarget.className += " active";
+      }
+
+      window.rp_requestAnimationFrame=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.msRequestAnimationFrame||(function(callback,element){setTimeout(callback,1000/60);});
+      function RadialProgress(container,cfg){
+        container.innerHTML="";
+        var nc=document.createElement("div");
+        nc.style.width="10em"; nc.style.height="10em";
+        nc.style.position="relative";
+        container.appendChild(nc);
+        container=nc;
+        if(!cfg) cfg={};
+        this.colorBg=cfg.colorBg==undefined?"#404040":cfg.colorBg;
+        this.colorFg=cfg.colorFg==undefined?"#007FFF":cfg.colorFg;
+        this.colorText=cfg.colorText==undefined?"#FFFFFF":cfg.colorText;
+        this.indeterminate=cfg.indeterminate==undefined?false:cfg.indeterminate;
+        this.round=cfg.round==undefined?false:cfg.round;
+        this.thick=cfg.thick==undefined?2:cfg.thick;
+        this.progress=cfg.progress==undefined?0:cfg.progress;
+        this.noAnimations=cfg.noAnimations==undefined?0:cfg.noAnimations;
+        this.fixedTextSize=cfg.fixedTextSize==undefined?false:cfg.fixedTextSize;
+        this.animationSpeed=cfg.animationSpeed==undefined?1:cfg.animationSpeed>0?cfg.animationSpeed:1;
+        this.noPercentage=cfg.noPercentage==undefined?false:cfg.noPercentage;
+        this.spin=cfg.spin==undefined?false:cfg.spin;
+        if(cfg.noInitAnimation) this.aniP=this.progress; else this.aniP=0;
+        var c=document.createElement("canvas");
+        c.style.position="absolute";c.style.top="0";c.style.left="0";c.style.width="70%";c.style.height="70%";c.className="rp_canvas";
+        container.appendChild(c);
+        this.canvas=c;
+        var tcc=document.createElement("div");
+        tcc.style.position="absolute";tcc.style.display="table";tcc.style.width="70%";tcc.style.height="70%";
+        var tc=document.createElement("div");
+        tc.style.display="table-cell";tc.style.verticalAlign="middle";
+        var t=document.createElement("div");
+        t.style.color=this.colorText;t.style.textAlign="center";t.style.overflow="visible";t.style.whiteSpace="nowrap";t.className="rp_text";
+        tc.appendChild(t);
+        tcc.appendChild(tc);
+        container.appendChild(tcc);
+        this.text=t;
+        this.prevW=0; this.prevH=0; this.prevP=0; this.indetA=0; this.indetB=0.2; this.rot=0;
+        this.draw=function(f){
+          if(!(f==true))rp_requestAnimationFrame(this.draw);
+          var c=this.canvas;
+          var dp=window.devicePixelRatio||1;
+          c.width=c.clientWidth*dp; c.height=c.clientHeight*dp;
+          if(!(f==true)&&!this.spin&&!this.indeterminate&&(Math.abs(this.prevP-this.progress)<1&&this.prevW==c.width&&this.prevH==c.height)) return;
+          var centerX=c.width/2, centerY=c.height/2, bw=(c.clientWidth/100.0), radius=c.height/2-(this.thick*bw*dp)/2, bw=(c.clientWidth/100.0);
+          this.text.style.fontSize=(this.fixedTextSize?(c.clientWidth*this.fixedTextSize):(c.clientWidth*0.26-this.thick))+"px";
+          if(this.noAnimations) this.aniP=this.progress; else{var aniF=Math.pow(0.93,this.animationSpeed);this.aniP=this.aniP*aniF+this.progress*(1-aniF);}
+          c=c.getContext("2d");
+          c.beginPath();
+          c.strokeStyle=this.colorBg;
+          c.lineWidth=this.thick*bw*dp;
+          c.arc(centerX,centerY,radius,-Math.PI/2, 2*Math.PI);
+          c.stroke();
+          c.beginPath();
+          c.strokeStyle=this.colorFg;
+          c.lineWidth=this.thick*bw*dp;
+          if(this.round) c.lineCap="round";
+          if(this.indeterminate){
+            this.indetA=(this.indetA+0.07*this.animationSpeed)%(2*Math.PI);this.indetB=(this.indetB+0.14*this.animationSpeed)%(2*Math.PI);
+            c.arc(centerX,centerY,radius,this.indetA, this.indetB);
+            if(!this.noPercentage)this.text.innerHTML="";
+          }else{
+            if(this.spin&&!this.noAnimations)this.rot=(this.rot+0.07*this.animationSpeed)%(2*Math.PI)
+            c.arc(centerX,centerY,radius,this.rot-Math.PI/2, this.rot+this.aniP*(2*Math.PI)-Math.PI/2);
+            if(!this.noPercentage)this.text.innerHTML=Math.round(100*this.aniP)+" %";
+          }
+          c.stroke();
+          this.prevW=c.width; this.prevH=c.height; this.prevP=this.aniP;
+        }.bind(this);
+        this.draw();
+      }
+
+      RadialProgress.prototype={
+        constructor:RadialProgress,
+        setValue:function(p){this.progress=p<0?0:p>1?1:p;},
+        setIndeterminate:function(i){this.indeterminate=i;},
+        setText:function(t){this.text.innerHTML=t;}
+      }
+
+      var bar=new RadialProgress(document.getElementById("bar"));
+      bar.setText("Velocidade");
+      bar.setValue(0.5);
+      
+      openTab(null, "REMP");
+
+    </script>
+  </body>
+</html>
