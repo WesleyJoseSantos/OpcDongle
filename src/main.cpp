@@ -32,12 +32,10 @@ void taskCommunication();
 
 void setup(){
   Serial.begin(115200);
-
   if(!SPIFFS.begin(true)){
       Serial.println("SPIFFS Mount Failed");
       return;
   }
-
   WiFi.softAP(cfg.getSsid(), cfg.getPass());
   dnsServer.start(53, "*", WiFi.softAPIP());
   server.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER);
@@ -52,11 +50,13 @@ void loop(){
 void taskCommunication(){
   if(Serial.available()){
     String data = Serial.readStringUntil('\n');
-
     if(data == "WifiOpcDongle?"){
       Serial.println("Yes");
     }else{
-      deserializeJson(CaptiveRequestHandler::doc, data);
+      StaticJsonDocument<512> temp;
+      deserializeJson(temp, data);
+      String key = temp["Name"];
+      CaptiveRequestHandler::doc[key] = temp["Value"];
     }
   }
 }

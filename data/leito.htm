@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Gerdau | Laminação 2</title>
     <style>
-
       * {
         margin: 0;
         padding: 0;
@@ -14,7 +13,6 @@
         box-sizing: border-box;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       }
-
       body {
         width: 100%;
         height: 100vh;
@@ -24,7 +22,6 @@
         align-items: center;
         justify-content: center;
       }
-
       .container {
         max-width: 420px;
         width: 100%;
@@ -37,69 +34,47 @@
         align-items: center;
         justify-content: space-around;
       }
-
       .card {
-        width: 145px;
-        height: 170px;
-        margin: 25px auto auto auto;
+        width: 100px;
+        height: 120px;
+        margin: 20px auto auto auto;
         background: #292929;
         border: 1px solid #999;
         border-radius: 6px;
       }
-
       .title {
         text-align: center;
         color: #f5f5f5;
       }
-
       header.title span {
         font-size: 3em;
       }
-
       .container form {
         width: 100%;
         margin-top: 10px;
       }
-
       .container select {
         width: 100%;
         height: 23px;
       }
-
-      .input {
-        width: 100%;
+      .value-display {
+        width: 97%;
         height: 33px;
-        margin-bottom: 15px;
-        margin-top: 5px;
+        margin-top: 15px;
         border: 1px solid #444;
         border-radius: 6px;
         padding: 5px;
       }
-
-      .input::placeholder {
-        color: #111;
-      }
-
-      .input:focus {
-        box-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
-      }
-
-      .input-content {
-        width: 100%;
-      }
-
       .label {
         color: #f5f5f5;
         font-size: 1em;
         align-self: flex-start;
       }
-
       .divider {
         border-bottom: 1px solid #ccc;
         margin-top: 20px;
         margin-bottom: 30px;
       }
-
       .btn {
         margin: 8px;
         width: 100%;
@@ -112,35 +87,29 @@
         color: #fff;
         background: #999;
       }
-
       .btn:hover {
         color: #999;
         background: #fff;
         border: 1px solid #999;
       }
-
       ul {
         list-style: none;
       }
-
       li {
         padding-top: 10px;
         margin-left: 5px;
         color: #fff;
       }
-
       .bloch {
         display:inline-block;
         height: 10px;
         width: 10px;
       }
-        
       .on {background: green;}
       .off {background: gray;}
       .rdy {background: darkblue;}
-      .problem {background: gold;}
-      .fail {background: red;}
-
+      .warning {background: gold;}
+      .err {background: red;}
       .tab {
         overflow: hidden;
         border: 1px solid #ccc;
@@ -148,7 +117,6 @@
         width: 100%;
         border-radius: 6px;
       }
-
       .tab button {
         background-color: inherit;
         float: left;
@@ -160,15 +128,12 @@
         font-size: 17px;
         color: #fff;
       }
-
       .tab button:hover {
         background: #535353;
       }
-
       .tab button.active {
         background: #686868;
       }
-
       .tabcontent {
         display: none;
         max-width: 420px;
@@ -183,13 +148,19 @@
         justify-content: space-around;
         color: #fff;
       }
-
       .circle{
-        padding: 15px;
+        padding: 8px;
       }
-
+      .column{
+        float: left;
+        width: 33%;
+      }
+      .row:after{
+        content: "";
+        display: table;
+        clear: both;
+      }
     </style>
-
   </head>
   <body>
     <div class="container">
@@ -209,106 +180,112 @@
 
       <div id="REMP" class="tabcontent">
         <h3>Rolos Emparelhadores</h3>
-        <ul><li><span id="bool1" class='bloch on'></span>
+        <ul><li><span id="REMP_ST" class='bloch err'></span>
           Status Motores   
         </li></ul>
-        <ul><li><span id="bool2" class='bloch on'></span>
+        <ul><li><span id="NR12_ST" class='bloch err'></span>
           Status NR12
         </li></ul>
-        <ul><li><span class='bloch on'></span>
-          Status Emergência 1
+        <ul><li><span id="EM_REMP" class='bloch err'></span>
+          Status Emergência
         </li></ul>
-        <ul><li><span class='bloch on'></span>
-          Status Emergência 2
-        </li></ul>
-        <ul><li><span class='bloch on'></span>
-          Saída de Vergalhões Habilitada
-        </li></ul>
-        <div class="card">
-          <p class="title">Velocidade</p>
-          <div id="velocidadeRemp" class="circle"></div>
+        <div class="row">
+          <div class="column">
+            <div class="card">
+              <p class="title">Referência</p>
+              <div id="REMP_REF" class="circle"></div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="card">
+              <p class="title">Velocidade</p>
+              <div id="REMP_VEL" class="circle"></div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="card">
+              <p class="title">Torque</p>
+              <div id="REMP_TQ" class="circle"></div>
+            </div>
+          </div>
         </div>
+
+
       </div>
 
       <div id="TC0" class="tabcontent">
         <h3>Transferidor de Correntes</h3>
-        <ul><li><span class='bloch on'></span>
-          Status Motor  
+        <ul><li><span id="TC0_ST" class='bloch on'></span>
+          Status Motores
         </li></ul>
-        <ul><li><span class='bloch on'></span>
-          Status Sincronização
-        </li></ul>
-        <ul><li><span class='bloch on'></span>
-          Saída de Vergalhões Habilitada
-        </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="REDE_SAIDA_ST" class='bloch on'></span>
           Status Rede Saída Perfis
         </li></ul>
-        <ul><li><span></span>
-          Posição Atual: #value
+        <ul><li id="TC0_POS" class="value-display">
+          Posição Atual:
         </li></ul>
-        <ul><li><span></span>
-          Número de Barras Atual: #value
+        <ul><li id="TC0_NUM_BAR" class="value-display">
+          Número de Barras Atual:
         </li></ul> 
       </div>
 
       <div id="CTF" class="tabcontent">
         <h3>Carro Transferidor</h3>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="CTF_ST" class='bloch on'></span>
           Status Motor  
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="CTF_SYNC" class='bloch on'></span>
           Status Sincronização
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="CTF_ABAIXO" class='bloch on'></span>
           Sensor Carro Abaixo
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="CTF_ACIMA" class='bloch on'></span>
           Sensor Carro Acima
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="CTF_ADIANTE" class='bloch on'></span>
           Sensor Carro Adiante
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="CTF_ATRAS" class='bloch on'></span>
           Sensor Carro Atrás
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="CTF_ADIANTE_ERR" class='bloch on'></span>
           Carro excedeu posição adiante
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="CTF_ATRAS_ERR" class='bloch on'></span>
           Carro excedeu posição atrás
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="SAIDA_HAB" class='bloch on'></span>
           Saída de Vergalhões Habilitada
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="REDE_SAIDA_ST" class='bloch on'></span>
           Status Rede Saída Perfis
         </li></ul>
-        <ul><li><span></span>
-          Posição Atual Carro 1: #value
+        <ul><li id="CTF_POS1" class="value-display">
+          Posição Atual Carro 1:
         </li></ul>
-        <ul><li><span></span>
-          Posição Atual Carro 2: #value
+        <ul><li id="CTF_POS2" class="value-display">
+          Posição Atual Carro 2:
         </li></ul> 
       </div>
 
       <div id="GRolos" class="tabcontent">
         <h3>GR0 e GR1</h3>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="GR0_ST" class='bloch on'></span>
           Status Motor GR0
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="GR1_ST" class='bloch on'></span>
           Status Motor GR1
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="NR12_ST" class='bloch on'></span>
           Status NR12
         </li></ul>
-        <ul><li><span class='bloch on'></span>
+        <ul><li><span id="EM_ST" class='bloch on'></span>
           Status Emergência
         </li></ul>
       </div>
 
-        <button onclick="showScreen('home.htm')" class="btn">Voltar</button>
+      <button onclick="showScreen('home.htm')" class="btn">Voltar</button>
     </div>
       
     <script>
@@ -330,6 +307,45 @@
         document.getElementById(tabName).style.display = "block";
         if(evt != null)
           evt.currentTarget.className += " active";
+      }
+
+      setInterval(function ( ) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            console.log(this.responseText);
+            if(data != null){
+              for (const key in data) {
+                if (Object.hasOwnProperty.call(data, key)) {
+                  const value = data[key];
+                  updateObject(key, value);
+                }
+              }
+            }
+          }
+        };
+        xhttp.open("GET", "/?data=true", true);
+        xhttp.send();
+      }, 1000) ;
+
+      function updateObject(id, value){
+        var obj = document.getElementById(id);
+        if(obj != null){
+          if(obj.classList.contains("bloch")){
+            obj.className = value ? "bloch on" : "bloch err";
+          }
+          if(obj.classList.contains("value-display")){
+            var label = obj.innerText.split(":")[0] + ": ";
+            obj.innerText = label + value;
+          }
+          if(obj.classList.contains("circle")){
+            obj = new RadialProgress(document.getElementById(id));
+            if(obj!=null){
+                obj.setValue(Math.abs(value / 100));
+            }
+          }
+        }
       }
 
       window.rp_requestAnimationFrame=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.msRequestAnimationFrame||(function(callback,element){setTimeout(callback,1000/60);});
@@ -357,11 +373,11 @@
         this.noInitAnimation = true;
         if(this.noInitAnimation) this.aniP=this.progress; else this.aniP=0;
         var c=document.createElement("canvas");
-        c.style.position="absolute";c.style.top="0";c.style.left="0";c.style.width="70%";c.style.height="70%";c.className="rp_canvas";
+        c.style.position="absolute";c.style.top="0";c.style.left="0";c.style.width="50%";c.style.height="50%";c.className="rp_canvas";
         container.appendChild(c);
         this.canvas=c;
         var tcc=document.createElement("div");
-        tcc.style.position="absolute";tcc.style.display="table";tcc.style.width="70%";tcc.style.height="70%";
+        tcc.style.position="absolute";tcc.style.display="table";tcc.style.width="50%";tcc.style.height="50%";
         var tc=document.createElement("div");
         tc.style.display="table-cell";tc.style.verticalAlign="middle";
         var t=document.createElement("div");
@@ -411,39 +427,17 @@
         setIndeterminate:function(i){this.indeterminate=i;},
         setText:function(t){this.text.innerHTML=t;}
       }
-
-      var bar = new RadialProgress(document.getElementById("velocidadeRemp"));
-      bar.setValue(0.5);
       
       openTab(null, "REMP");
 
-      setInterval(function ( ) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            var data = JSON.parse(this.responseText);
-            data.forEach(tag => {
-              updateObject(tag.Name, tag.Value);
-            });
-          }
-        };
-        xhttp.open("GET", "/?data=true", true);
-        xhttp.send();
-      }, 1000) ;
+      var bar1 = new RadialProgress(document.getElementById("REMP_REF"));
+      bar.setValue(0.5);
 
-      
-      function updateObject(id, value){
-        var obj = document.getElementById(id);
-        
-        if(obj.classList.contains("bloch")){
-          obj.className = value ? "bloch on" : "bloch off";
-        }
-        
-        if(obj.classList.contains("circle")){
-          obj = new RadialProgress(document.getElementById("velocidadeRemp"));
-          obj.setValue(Math.abs(value / 100));
-        }
-      }
+      var bar2 = new RadialProgress(document.getElementById("REMP_VEL"));
+      bar2.setValue(0.5);
+
+      var bar3 = new RadialProgress(document.getElementById("REMP_TQ"));
+      bar3.setValue(0.5);
 
     </script>
   </body>
