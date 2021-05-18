@@ -54,7 +54,6 @@ public:
             bool data = request->getParam("data")->value();
             if(data){
                 serializeJson(doc, json);
-                // Serial.println(json);
             }
             request->send(200, "text/json", json);
         }else if(request->hasParam("screen")){
@@ -62,10 +61,10 @@ public:
             request->send(SPIFFS, screen);
             Serial.println(screen);
         }
-        // else{
-        //     request->send(SPIFFS, "/home.htm");
-        //     Serial.println("/home.htm");
-        // }
+        else{
+            request->send(SPIFFS, "/home.htm");
+            Serial.println("/home.htm");
+        }
     }
 };
 
