@@ -85,12 +85,10 @@
         font-size: 1em;
         cursor: pointer;
         color: #fff;
-        background: #999;
+        background: #007ACC;
       }
       .btn:hover {
-        color: #999;
-        background: #fff;
-        border: 1px solid #999;
+        background: #1C97EA;
       }
       ul {
         list-style: none;
@@ -100,13 +98,13 @@
         margin-left: 5px;
         color: #fff;
       }
-      .bloch {
+      .bloch, .block {
         display:inline-block;
         height: 10px;
         width: 10px;
       }
       .on {background: green;}
-      .off {background: gray;}
+      .off {background: lightgray;}
       .rdy {background: darkblue;}
       .warning {background: gold;}
       .err {background: red;}
@@ -129,15 +127,15 @@
         color: #fff;
       }
       .tab button:hover {
-        background: #535353;
+        background: #1C97EA;
       }
       .tab button.active {
-        background: #686868;
+        background: #007ACC;
       }
       .tabcontent {
         display: none;
         max-width: 420px;
-        min-height: 440px;
+        min-height: 410px;
         width: 100%;
         padding: 20px 15px;
         background: #1e1e1e;
@@ -172,19 +170,36 @@
       </header>
 
       <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'GRL')">Geral</button>
         <button class="tablinks" onclick="openTab(event, 'REMP')">REMP</button>
         <button class="tablinks" onclick="openTab(event, 'TC0')">TC0</button>
         <button class="tablinks" onclick="openTab(event, 'CTF')">CTF</button>
-        <button class="tablinks" onclick="openTab(event, 'GRolos')">GRolos</button>
+        <button class="tablinks" onclick="openTab(event, 'Rolos')">Rolos</button>
+      </div>
+
+      <div id="GRL" class="tabcontent">
+        <h3>Geral</h3>
+        <ul><li><span id="REDE_SAIDA_ST" class='bloch err'></span>
+          Status  Comunicação DPDP
+        </li></ul>
+        <ul><li><span id="NR12_ST" class='bloch err'></span>
+          Status NR12
+        </li></ul>
+        <ul><li><span id="EM_PC10_ST" class='bloch err'></span>
+          Emergência Mesa de Operação
+        </li></ul>
+        <ul><li><span id="ALIM_220" class='bloch err'></span>
+          Alimentação 220V
+        </li></ul>
+        <ul><li><span id="ALIM_380" class='bloch err'></span>
+          Alimentação 380V
+        </li></ul>
       </div>
 
       <div id="REMP" class="tabcontent">
         <h3>Rolos Emparelhadores</h3>
         <ul><li><span id="REMP_ST" class='bloch err'></span>
           Status Motores   
-        </li></ul>
-        <ul><li><span id="NR12_ST" class='bloch err'></span>
-          Status NR12
         </li></ul>
         <ul><li><span id="EM_REMP" class='bloch err'></span>
           Status Emergência
@@ -209,17 +224,12 @@
             </div>
           </div>
         </div>
-
-
       </div>
 
       <div id="TC0" class="tabcontent">
-        <h3>Transferidor de Correntes</h3>
-        <ul><li><span id="TC0_ST" class='bloch on'></span>
+        <h3>Transferidor de Correntes do Leito</h3>
+        <ul><li><span id="TC0_ST" class='bloch err'></span>
           Status Motores
-        </li></ul>
-        <ul><li><span id="REDE_SAIDA_ST" class='bloch on'></span>
-          Status Rede Saída Perfis
         </li></ul>
         <ul><li id="TC0_POS" class="value-display">
           Posição Atual:
@@ -230,36 +240,30 @@
       </div>
 
       <div id="CTF" class="tabcontent">
-        <h3>Carro Transferidor</h3>
-        <ul><li><span id="CTF_ST" class='bloch on'></span>
+        <h3>Carro de Transferência</h3>
+        <ul><li><span id="CTF_ST" class='bloch err'></span>
           Status Motor  
         </li></ul>
-        <ul><li><span id="CTF_SYNC" class='bloch on'></span>
+        <ul><li><span id="CTF_SYNC" class='bloch err'></span>
           Status Sincronização
         </li></ul>
-        <ul><li><span id="CTF_ABAIXO" class='bloch on'></span>
+        <ul><li><span id="CTF_ABAIXO" class='block err'></span>
           Sensor Carro Abaixo
         </li></ul>
-        <ul><li><span id="CTF_ACIMA" class='bloch on'></span>
+        <ul><li><span id="CTF_ACIMA" class='block err'></span>
           Sensor Carro Acima
         </li></ul>
-        <ul><li><span id="CTF_ADIANTE" class='bloch on'></span>
+        <ul><li><span id="CTF_ADIANTE" class='block err'></span>
           Sensor Carro Adiante
         </li></ul>
-        <ul><li><span id="CTF_ATRAS" class='bloch on'></span>
+        <ul><li><span id="CTF_ATRAS" class='block err'></span>
           Sensor Carro Atrás
         </li></ul>
-        <ul><li><span id="CTF_ADIANTE_ERR" class='bloch on'></span>
+        <ul><li><span id="CTF_ADIANTE_ERR" class='bloch err'></span>
           Carro excedeu posição adiante
         </li></ul>
-        <ul><li><span id="CTF_ATRAS_ERR" class='bloch on'></span>
+        <ul><li><span id="CTF_ATRAS_ERR" class='bloch err'></span>
           Carro excedeu posição atrás
-        </li></ul>
-        <ul><li><span id="SAIDA_HAB" class='bloch on'></span>
-          Saída de Vergalhões Habilitada
-        </li></ul>
-        <ul><li><span id="REDE_SAIDA_ST" class='bloch on'></span>
-          Status Rede Saída Perfis
         </li></ul>
         <ul><li id="CTF_POS1" class="value-display">
           Posição Atual Carro 1:
@@ -269,19 +273,28 @@
         </li></ul> 
       </div>
 
-      <div id="GRolos" class="tabcontent">
-        <h3>GR0 e GR1</h3>
-        <ul><li><span id="GR0_ST" class='bloch on'></span>
-          Status Motor GR0
-        </li></ul>
-        <ul><li><span id="GR1_ST" class='bloch on'></span>
+      <div id="Rolos" class="tabcontent">
+        <h3>GR1 e GR2</h3>
+        <ul><li><span id="GR1_ST" class='bloch err'></span>
           Status Motor GR1
         </li></ul>
-        <ul><li><span id="NR12_ST" class='bloch on'></span>
-          Status NR12
+        <ul><li><span id="GR2_ST" class='bloch err'></span>
+          Status Motor GR2
         </li></ul>
-        <ul><li><span id="EM_ST" class='bloch on'></span>
-          Status Emergência
+        <ul><li><span id="EM_PC11_ST" class='bloch err'></span>
+          Emergência Posto Local
+        </li></ul>
+        <ul><li><span id="GR_PRESFX_4" class='block err'></span>
+          Sensor presença de feixe 4
+        </li></ul>
+        <ul><li><span id="GR_PRESFX_3" class='block err'></span>
+          Sensor presença de feixe 3
+        </li></ul>
+        <ul><li><span id="GR_PRESFX_2" class='block err'></span>
+          Sensor presença de feixe 2
+        </li></ul>
+        <ul><li><span id="GR_PRESFX_1" class='block err'></span>
+          Sensor presença de feixe 1
         </li></ul>
       </div>
 
@@ -289,7 +302,8 @@
     </div>
       
     <script>
-
+      window.scrollTo(0,0);
+      
       function showScreen(screen) {
         window.location.href = "/?screen=" + screen
       }
@@ -334,6 +348,9 @@
         if(obj != null){
           if(obj.classList.contains("bloch")){
             obj.className = value ? "bloch on" : "bloch err";
+          }
+          if(obj.classList.contains("block")){
+            obj.className = value ? "block on" : "block off";
           }
           if(obj.classList.contains("value-display")){
             var label = obj.innerText.split(":")[0] + ": ";
@@ -428,7 +445,7 @@
         setText:function(t){this.text.innerHTML=t;}
       }
       
-      openTab(null, "REMP");
+      openTab(null, "GRL");
 
       var bar1 = new RadialProgress(document.getElementById("REMP_REF"));
       bar.setValue(0.5);
