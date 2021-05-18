@@ -26,7 +26,7 @@
 
 DNSServer dnsServer;
 AsyncWebServer server(80);
-DongleCfg cfg = DongleCfg("Gerdau L2 IoT", "riograndense");
+DongleCfg cfg = DongleCfg("Gerdau L2 Leito", "");
 
 void taskCommunication();
 
@@ -40,6 +40,8 @@ void setup(){
   dnsServer.start(53, "*", WiFi.softAPIP());
   server.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER);
   server.begin();
+  Serial.print("Server started at ");
+  Serial.println(WiFi.softAPIP().toString());
 }
 
 void loop(){
